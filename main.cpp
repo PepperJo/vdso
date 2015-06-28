@@ -5,14 +5,6 @@
 
 #include <vgtod.h>
 
-static inline std::uint64_t rdtsc()
-{
-    std::uint32_t lo, hi;
-    asm volatile ("lfence; rdtsc" : "=a"(lo), "=d"(hi));
-    return lo | (static_cast<std::uint64_t>(hi)
-            << std::numeric_limits<decltype(hi)>::digits);
-}
-
 int main(int argc, char *argv[])
 {
     const vsyscall_gtod_data* gtod = vgtod();
