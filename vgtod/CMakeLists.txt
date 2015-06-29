@@ -12,7 +12,7 @@ math(EXPR len "${len} - 1")
 string(SUBSTRING ${kv} 0 ${len} kv)
 include_directories(/lib/modules/${kv}/build/arch/x86/include)
 
-execute_process(COMMAND grep -Pzo "struct vsyscall_gtod_data.*?{[^\}]*};"
+execute_process(COMMAND grep -Pzo "struct vsyscall_gtod_data.*?{(?s).*};"
     /lib/modules/${kv}/build/arch/x86/include/asm/vgtod.h
     OUTPUT_FILE linux_vgtod.h)
 execute_process(COMMAND grep "VCLOCK"
